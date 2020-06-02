@@ -1,9 +1,56 @@
-<template>
-  <button class="g-button">Click</button>
-</template>
 <script>
 export default {
   name: "",
+  props: {
+    icon: String,
+    iconPosition: {
+      default: "left",
+    },
+  },
+  render(h) {
+    const icon = this.icon;
+    const svgnode = {
+      render(h) {
+        return h(
+          "svg",
+          {
+            class: {
+              icon: true,
+            },
+          },
+          [
+            h("use", {
+              attrs: {
+                "xlink:href": `#i-${icon}`,
+              },
+            }),
+          ]
+        );
+      },
+    };
+
+    return h(
+      "button",
+      {
+        class: {
+          "g-button": true,
+        },
+      },
+      [
+        icon && this.iconPosition === "left",
+        this.$slots.default,
+        icon && this.iconPosition === "right",
+      ]
+        .filter((ele) => ele)
+        .map((p) => {
+          if (typeof p === "boolean") {
+            return h(svgnode);
+          } else {
+            return p;
+          }
+        })
+    );
+  },
 };
 </script>
 
