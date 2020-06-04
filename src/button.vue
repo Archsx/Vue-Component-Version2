@@ -1,6 +1,6 @@
 <template>
   <button class="g-button" :class="{ 'icon-right': iconPosition === 'right' }">
-    <svg class="icon" v-if="icon"><use :xlink:href="`#i-${icon}`"></use></svg>
+    <g-icon :name="icon" v-if="icon" class="icon"></g-icon>
     <div class="content">
       <slot></slot>
     </div>
@@ -13,6 +13,13 @@ export default {
     icon: String,
     iconPosition: {
       default: "left",
+      validator(value){
+        if(value !== 'left' && value !== 'right'){
+          return false
+        }else{
+          return true
+        }
+      }
     },
   },
   // 使用render函数的方式，可以不用css方式控制icon出现的位置，但是太麻烦了
