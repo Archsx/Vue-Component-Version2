@@ -1,6 +1,11 @@
 <template>
-  <button class="g-button" :class="{ 'icon-right': iconPosition === 'right' }">
-    <g-icon :name="icon" v-if="icon" class="icon"></g-icon>
+  <button
+    class="g-button"
+    :class="{ 'icon-right': iconPosition === 'right' }"
+    :disabled="loading"
+  >
+    <g-icon :name="icon" v-if="icon && !loading" class="icon"></g-icon>
+    <g-icon name="loading" class="loading icon" v-if="loading"></g-icon>
     <div class="content">
       <slot></slot>
     </div>
@@ -11,17 +16,22 @@ export default {
   name: "",
   props: {
     icon: String,
+    loading: {
+      type: Boolean,
+      default: false,
+    },
     iconPosition: {
       default: "left",
-      validator(value){
-        if(value !== 'left' && value !== 'right'){
-          return false
-        }else{
-          return true
+      validator(value) {
+        if (value !== "left" && value !== "right") {
+          return false;
+        } else {
+          return true;
         }
-      }
+      },
     },
   },
+  methods: {},
   // 使用render函数的方式，可以不用css方式控制icon出现的位置，但是太麻烦了
   // render(h) {
   //   const icon = this.icon;
@@ -71,6 +81,24 @@ export default {
 </script>
 
 <style lang="scss">
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: 0.65;
+}
+
 .g-button {
   vertical-align: middle;
   display: inline-flex;
@@ -108,6 +136,9 @@ export default {
       order: 2;
       margin: 0 0 0 0.3em;
     }
+  }
+  .loading {
+    animation: spin 1.5s linear infinite;
   }
 }
 </style>
