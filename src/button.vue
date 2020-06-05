@@ -3,6 +3,7 @@
     class="g-button"
     :class="{ 'icon-right': iconPosition === 'right' }"
     :disabled="loading"
+    @click="handleClick"
   >
     <g-icon :name="icon" v-if="icon && !loading" class="icon"></g-icon>
     <g-icon name="loading" class="loading icon" v-if="loading"></g-icon>
@@ -31,7 +32,11 @@ export default {
       },
     },
   },
-  methods: {},
+  methods: {
+    handleClick(){
+      this.$emit("clicked")
+    }
+  },
   // 使用render函数的方式，可以不用css方式控制icon出现的位置，但是太麻烦了
   // render(h) {
   //   const icon = this.icon;
