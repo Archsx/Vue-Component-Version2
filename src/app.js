@@ -7,6 +7,8 @@ Vue.component("g-button", Button);
 Vue.component("g-icon", Icon);
 Vue.component("g-button-group", ButtonGroup);
 
+console.log(Vue.extend(Button))
+
 new Vue({
   el: "#app",
   data() {
