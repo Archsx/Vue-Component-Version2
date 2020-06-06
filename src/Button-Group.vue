@@ -8,9 +8,9 @@
 export default {
   mounted() {
     // console.log(this.$children) // 这个只会找vue组件实例
-    for(let node of this.$el.children){
-      if(node.nodeName.toLowerCase() !== 'button'){
-        console.warn('g-button-group的子元素应该全是g-button')
+    for (let node of this.$el.children) {
+      if (node.nodeName.toLowerCase() !== "button") {
+        console.warn("g-button-group的子元素应该全是g-button");
       }
     }
   },
@@ -26,16 +26,18 @@ export default {
     // &:not(:first-child){
     //   border-left: none;
     // }
-    margin-left: -1px;
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
     &:first-child {
       border-top-left-radius: var(--border-radius);
       border-bottom-left-radius: var(--border-radius);
     }
-    &:last-child{
+    &:last-child {
       border-top-right-radius: var(--border-radius);
       border-bottom-right-radius: var(--border-radius);
     }
-    &:hover{
+    &:hover {
       position: relative;
       z-index: 1;
     }
