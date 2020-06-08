@@ -16,6 +16,8 @@ new Vue({
 
 // 单元测试
 import chai from "chai";
+import spies from "chai-spies";
+chai.use(spies);
 const expect = chai.expect;
 // 测试到底测什么？props和event
 {
@@ -83,15 +85,15 @@ const expect = chai.expect;
   instance.$el.remove();
 }
 {
-  const Constructor = Vue.extend(Button)
+  const Constructor = Vue.extend(Button);
   const instance = new Constructor({
-    propsData:{
-      icon:'settings'
-    }
-  })
-  instance.$mount()
-  instance.$on('click',()=>{
-    console.log('clicked')
-  })
-  instance.$el.click()
+    propsData: {
+      icon: "settings",
+    },
+  });
+  instance.$mount();
+  let spy = chai.spy(function() {});
+  instance.$on("click", spy);
+  instance.$el.click();
+  expect(spy).to.have.been.called();
 }
