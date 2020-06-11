@@ -13,8 +13,12 @@
   </button>
 </template>
 <script>
+import Icon from "./Icon.vue";
 export default {
   name: "",
+  components: {
+    "g-icon": Icon,
+  },
   props: {
     icon: String,
     loading: {
@@ -33,9 +37,9 @@ export default {
     },
   },
   methods: {
-    handleClick(){
-      this.$emit("clicked")
-    }
+    handleClick() {
+      this.$emit("click");
+    },
   },
   // 使用render函数的方式，可以不用css方式控制icon出现的位置，但是太麻烦了
   // render(h) {
