@@ -16,7 +16,6 @@
              icon: 'settings'
          }
          }).$mount()
-         console.log(vm.$el)
          const useElement = vm.$el.querySelector('use')
          expect(useElement.getAttribute('xlink:href')).to.equal('#i-settings')
          vm.$destroy()
