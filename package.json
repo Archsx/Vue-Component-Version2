@@ -1,9 +1,10 @@
 {
-  "name": "custom-vue-component",
-  "version": "1.0.0",
+  "name": "zoidberg-me-vue2-component-test",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start":"parcel index.html --no-cache",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
     "dev-test": "parcel watch test/* --no-cache &  karma start --auto-watch"
   },
