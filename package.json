@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"parcel index.html --no-cache",
+    "start":"parcel %INIT_CWD%/index.html --no-cache",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
     "dev-test": "parcel watch test/* --no-cache &  karma start --auto-watch"
   },

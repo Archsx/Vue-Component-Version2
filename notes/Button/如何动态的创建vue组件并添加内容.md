@@ -125,15 +125,35 @@
   // 注意 $slots[key]should be an array of vNodes
 
 
+```
 
+##### 另一个使用$createElement给向slot插入内容的例子
 
+```
+  //MyComponent.vue
+  <template>
+    <div>
+      <h2>{{someProp}}</h2>
+      <slot></slot>
+    </div>
+  </template>
 
+  //somewhere else
 
+  const Constr = Vue.extend(MyComponent)
+  const instance = new Constr({
+    propsData:{
+      someProp:'My Heading'
+    }
+  })
 
+  // creating simple slot
+  // 注意下这个写法 感觉这个$createElement就像是h函数，用来生成vnode
+  const node = instance.$createElement('div',['Hello'])
+  instance.$slots.default = [node]
 
-
-
-
+  instance.$mount(body)
 
 
 ```
+
