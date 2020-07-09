@@ -5,6 +5,10 @@
       type="text"
       :disabled="disabled"
       :readonly="readonly"
+      @change="handleChange"
+      @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur"
     />
     <template v-if="error">
       <icon name="error" class="iconError"></icon>
@@ -23,7 +27,6 @@ export default {
   props: {
     value: {
       type: String,
-      default: "Hello World",
     },
     disabled: {
       type: Boolean,
@@ -36,6 +39,20 @@ export default {
     error: {
       type: String,
     },
+  },
+  methods: {
+    handleChange(e) {
+      this.$emit("change", e);
+    },
+    handleInput(e) {
+      this.$emit("input", e);
+    },
+    handleFocus(e) {
+      this.$emit("focus", e);
+    },
+    handleBlur(e) {
+      this.$emit("blur", e);
+    }
   },
 };
 </script>
@@ -54,8 +71,8 @@ $error-color: #e74c3c;
   font-size: 14px;
   display: inline-flex;
   align-items: center;
-  > :not(:last-child){
-    margin-right: .5em;
+  > :not(:last-child) {
+    margin-right: 0.5em;
   }
   &.error {
     > input {
@@ -64,7 +81,7 @@ $error-color: #e74c3c;
     .iconError {
       fill: $error-color;
     }
-    .errorMessage{
+    .errorMessage {
       color: $error-color;
     }
   }
