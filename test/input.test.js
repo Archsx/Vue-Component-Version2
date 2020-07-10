@@ -64,9 +64,10 @@ describe("Input", () => {
         vm.$on(ele, callback);
         // 触发 input 的change事件
         var event = new Event(ele);
+        Object.defineProperty(event,'target',{writable:false,value:{value:'custom-value'}})
         let inputElement = vm.$el.querySelector("input");
         inputElement.dispatchEvent(event);
-        expect(callback).to.have.been.calledWith(event);
+        expect(callback).to.have.been.calledWith('custom-value');
       });
     });
   });

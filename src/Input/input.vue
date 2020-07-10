@@ -42,16 +42,16 @@ export default {
   },
   methods: {
     handleChange(e) {
-      this.$emit("change", e);
+      this.$emit("change", e.target.value);
     },
     handleInput(e) {
-      this.$emit("input", e);
+      this.$emit("input", e.target.value);
     },
     handleFocus(e) {
-      this.$emit("focus", e);
+      this.$emit("focus", e.target.value);
     },
     handleBlur(e) {
-      this.$emit("blur", e);
+      this.$emit("blur", e.target.value);
     }
   },
 };
