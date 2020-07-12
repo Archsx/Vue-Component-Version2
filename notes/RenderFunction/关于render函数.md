@@ -1,12 +1,13 @@
-##### 初识render函数
+##### 初识 render 函数
 
-在vue项目中，template模板被相关loader转换成render函数，但是如果我们需要发挥js的能力，我们可以直接写render函数，说实话，刚开始的话可能还有些不习惯，毕竟模板里面那么多指令呢。需要注意的是，我们平时写的export default {},其实就是导出了一个对象。
-```
+在 vue 项目中，template 模板被相关 loader 转换成 render 函数，但是如果我们需要发挥 js 的能力，我们可以直接写 render 函数，说实话，刚开始的话可能还有些不习惯，毕竟模板里面那么多指令呢。需要注意的是，我们平时写的 export default {},其实就是导出了一个对象。
+
+```javascript
     // parent component
 
     import subComponent from 'path/to/subComponent'
 
-    
+
 
     export default {
         props:['someProp']
@@ -52,30 +53,7 @@
             // 这里看起来有点离谱，说明h方法的参数可能是一个对象(这个对象也包含render方法)，而不是简单的h('div',{},[])这样的形式
             return h(somevnode)
 
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 ```
