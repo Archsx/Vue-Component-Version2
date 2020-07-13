@@ -27,15 +27,14 @@ describe("Row", () => {
     rowVm.$mount(div);
 
     rowVm.$nextTick(() => {
-      const row = rowVm.$el
-      expect(getComputedStyle(row).marginLeft).to.eq('-5px')
+      const row = rowVm.$el;
+      expect(getComputedStyle(row).marginLeft).to.eq("-5px");
 
-
-      const cols = rowVm.$el.querySelectorAll('.col')
-      expect(getComputedStyle(cols[0]).paddingLeft).to.eq('5px')
-      rowVm.$el.remove()
-      rowVm.$destroy()
-      done()
+      const cols = rowVm.$el.querySelectorAll(".col");
+      expect(getComputedStyle(cols[0]).paddingLeft).to.eq("5px");
+      rowVm.$el.remove();
+      rowVm.$destroy();
+      done();
     });
   });
 });
