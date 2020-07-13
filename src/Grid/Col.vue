@@ -1,5 +1,11 @@
 <template>
-  <div :span="span" class="col" :offset="offset" :style="colStyle">
+  <div
+    :span="span"
+    class="col"
+    :offset="offset"
+    :style="colStyle"
+    :class="colClass"
+  >
     <slot></slot>
   </div>
 </template>
@@ -12,6 +18,21 @@ export default {
       type: String | Number,
     },
     offset: {
+      type: String | Number,
+    },
+    xs: {
+      type: String | Number,
+    },
+    sm: {
+      type: String | Number,
+    },
+    md: {
+      type: String | Number,
+    },
+    lg: {
+      type: String | Number,
+    },
+    xl: {
       type: String | Number,
     },
   },
@@ -27,24 +48,32 @@ export default {
         paddingRight: this.gutter / 2 + "px",
       };
     },
+    colClass() {
+      let { xs, sm, md, lg, xl } = this;
+      return [
+        xs && `col-xs-${xs}`,
+        sm && `col-sm-${sm}`,
+        md && `col-md-${md}`,
+        lg && `col-lg-${lg}`,
+        xl && `col-xl-${xl}`,
+      ];
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.col {
-  height: 100px;
-  width: 100%;
-  // background-color: salmon;
-  border: 1px solid green;
+@import "./responsive.scss";
 
-  @for $i from 1 through 24 {
-    &[span="#{$i}"] {
-      width: ($i / 24) * 100%;
-    }
-    &[offset="#{$i}"] {
-      margin-left: ($i / 24) * 100%;
-    }
-  }
+.col {
+  width: 100%;
 }
+
+@include set-respond-max-width-or-span-or-offset(span, width);
+@include set-respond-max-width-or-span-or-offset(offset, margin-left);
+@include set-respond-max-width-or-span-or-offset(xl, width);
+@include set-respond-max-width-or-span-or-offset(lg, width);
+@include set-respond-max-width-or-span-or-offset(md, width);
+@include set-respond-max-width-or-span-or-offset(sm, width);
+@include set-respond-max-width-or-span-or-offset(xs, width);
 </style>

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div id="app">
-    <g-row>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <g-row>
       <g-col span="12"></g-col>
       <g-col span="10" offset="2"></g-col>
     </g-row>
@@ -15,8 +22,13 @@
       <g-col >1</g-col>
       <g-col offset="10">2</g-col>
       <g-col>3</g-col>
-    </g-row>
-  </div>
-  <script src="./app.js"></script>
-</body>
+    </g-row> -->
+
+      <g-row>
+        <g-col span="9" :sm="12" :xl="1" class="topbar"></g-col>
+        <g-col span="15" :sm="12" :xl="23" class="topbar"></g-col>
+      </g-row>
+    </div>
+    <script src="./app.js"></script>
+  </body>
 </html>

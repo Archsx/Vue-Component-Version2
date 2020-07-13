@@ -1,0 +1,32 @@
+$breakpoints: (
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+  xl: 1600px,
+);
+
+@mixin set-respond-max-width-or-span-or-offset($param,$attr) {
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $param) {
+    // Get the breakpoint value.
+    $param-value: map-get($breakpoints, $param);
+
+    // Write the media query.
+    @media only screen and (max-width: ($param-value - 1)) {
+      @for $i from 1 through 24 {
+        .col-#{$param}-#{$i} {
+          #{$attr}: ($i/24) * 100% !important;
+        }
+      }
+    }
+
+    // If the breakpoint doesn't exist in the map.
+  } @else {
+    @for $i from 1 through 24 {
+      .col[#{$param}="#{$i}"] {
+        #{$attr}: ($i / 24) * 100%;
+      }
+    }
+  }
+}
