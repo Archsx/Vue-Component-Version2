@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"parcel %INIT_CWD%/index.html --no-cache",
+    "start": "parcel %INIT_CWD%/index.html --no-cache",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-    "dev-test": "parcel watch test/* --no-cache &  karma start --auto-watch"
+    "dev-test": " concurrently \" parcel watch test/* --no-cache \"  \"karma start --auto-watch\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Archsx/Vue-Component-Version2#readme",
   "dependencies": {
+    "concurrently": "^5.2.0",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4"
   },
