@@ -10,8 +10,8 @@
       ]"
       :style="positionStyle"
       v-show="visible"
-      @mouseenter="clearTime"
-      @mouseleave="startTime"
+      @mouseenter="clearTimer"
+      @mouseleave="startTimer"
       role="alert"
     >
       <i :class="iconClass" v-if="iconClass"></i>
@@ -93,7 +93,7 @@ export default {
         this.onClose(this);
       }
     },
-    clearTime() {
+    clearTimer() {
       clearTimeout(this.timer);
     },
     startTimer() {
