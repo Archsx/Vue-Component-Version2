@@ -1,4 +1,9 @@
 import Toast from './Toast.vue'
+let ToastConstructor = Vue.extend(Toast)
+
+let instance
+let instances = []
+let seed = 1
 
 export default {
   install(Vue,options){
