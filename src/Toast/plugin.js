@@ -1,4 +1,5 @@
 import Toast from "./Toast.vue";
+import {isVNode} from '../../utils/util'
 
 let instance;
 let instances = [];
@@ -6,7 +7,6 @@ let seed = 1;
 
 function close(id) {
 
-  console.log(id)
 
   let len = instances.length;
   let index = -1;
@@ -20,14 +20,11 @@ function close(id) {
     }
   }
 
-  console.log('len_________'+len)
-  console.log('index_________'+index)
 
   if (len <= 1 || index === -1 || index > instances.length - 1) {
     return;
   }
 
-  console.log('aaa')
 
   for (let i = index; i < len - 1; i++) {
     let dom = instances[i].$el;
@@ -53,6 +50,11 @@ export default {
         data: options,
       });
       instance.id = id;
+      
+      if(isVNode(instance.message)){
+        instance.$slots.default = [instance.message]
+        instance.message = null
+      }
       instance.$mount();
       document.body.appendChild(instance.$el);
 
