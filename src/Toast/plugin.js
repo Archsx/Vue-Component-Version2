@@ -1,16 +1,14 @@
 import Toast from './Toast.vue'
-let ToastConstructor = Vue.extend(Toast)
 
-let instance
-let instances = []
-let seed = 1
 
 export default {
   install(Vue,options){
-    Vue.prototype.$toast = function(message){
+    Vue.prototype.$toast = function(message,toastOptions){
       const Ctor = Vue.extend(Toast)
       const toastVm = new Ctor({
-
+        propsData:{
+          closeButton:toastOptions.closeButton
+        }
       })
       toastVm.$slots.default = [message]
       toastVm.$mount() // 必须mount一下，不然不会执行生命周期的钩子
