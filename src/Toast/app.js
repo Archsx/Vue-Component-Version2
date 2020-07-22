@@ -6,7 +6,9 @@ Vue.use(plugin);
 new Vue({
   el: "#app",
   mounted() {
-    this.$toast("Hello World", {
+    this.$toast("文文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字字文字文字", {
+      enableHtml:true,
+      position:"middle",
       closeButton: {
         text: "Close",
         callback() {
