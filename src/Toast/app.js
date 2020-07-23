@@ -12,7 +12,7 @@ new Vue({
         "文文字文"+Math.random(),
         {
           enableHtml: true,
-          position: "middle",
+          position: "bottom",
           closeButton: {
             text: "Close",
             callback() {
