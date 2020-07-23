@@ -17,7 +17,7 @@ export default {
       default: true,
     },
     autoCloseDelay: {
-      default: 100,
+      default: 1,
     },
     closeButton: {
       default() {
