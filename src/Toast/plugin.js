@@ -18,7 +18,7 @@ let currentToast;
 export default {
   install(Vue, options) {
     Vue.prototype.$toast = function(message, toastOptions) {
-      if (currentToast) {
+      if (currentToast && !currentToast.closed) {
         currentToast.close();
       }
       currentToast = createToastVm({ Vue, message, options: toastOptions });
