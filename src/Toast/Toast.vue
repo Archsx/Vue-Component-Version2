@@ -1,10 +1,12 @@
 <template>
-  <div :class="['toast',toastClasses]" >
-    <slot v-if="!enableHtml"></slot>
-    <div v-else v-html="message"></div>
-    <span class="close" v-if="closeButton" @click="onClickClose">
-      {{ closeButton.text }}
-    </span>
+  <div :class="['wrapper', wrapperClasses]">
+    <div class="toast">
+      <slot v-if="!enableHtml"></slot>
+      <div v-else v-html="message"></div>
+      <span class="close" v-if="closeButton" @click="onClickClose">
+        {{ closeButton.text }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -25,28 +27,27 @@ export default {
         };
       },
     },
-    message:{
-      default:''
+    message: {
+      default: "",
     },
-    enableHtml:{
-      default:false
+    enableHtml: {
+      default: false,
     },
-    position:{
-      type:String,
-      default:'top',
-      validator(value){
-        return ['top','bottom','middle'].indexOf(value) >= 0
-      }
-    }
+    position: {
+      type: String,
+      default: "top",
+      validator(value) {
+        return ["top", "bottom", "middle"].indexOf(value) >= 0;
+      },
+    },
   },
   computed: {
-    toastClasses(){
-      return this.position
-    }
+    wrapperClasses() {
+      return this.position;
+    },
   },
   data() {
-    return {
-    }
+    return {};
   },
   mounted() {
     if (this.autoClose) {
@@ -54,7 +55,7 @@ export default {
         this.close();
       }, this.autoCloseDelay * 1000);
     }
-    // 这是老师的代码 仅仅使为了记录 
+    // 这是老师的代码 仅仅使为了记录
     // this.$nextTick(()=>{
     //   this.$refs.line.style.height = `${this.$refs.wrapper.getBoundingClientRect().height}px`
     // })
@@ -62,7 +63,7 @@ export default {
   methods: {
     close() {
       this.$el.remove();
-      this.$emit('close')
+      this.$emit("close");
       this.$destroy();
     },
     onClickClose() {
@@ -76,39 +77,54 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.toast {
-  position: fixed;
-  display: flex;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 10px 15px;
-  &.top{
-    top:0
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    // transform: translateY(100%);
+    transform:scale(1.1)
   }
-  &.bottom{
-    bottom: 0;
-  }
-  &.middle{
-    top:50%;
-    transform: translate(-50%,-50%);
+  100% {
+    opacity: 1;
+    // transform: translateY(0%);
+    transform: scale(1);
   }
 }
-.close {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
-  padding-left: 8px;
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0px;
-    height: 100%;
+.wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  &.top {
     top: 0;
-    border-left: 1px solid #ccc;
+  }
+  &.bottom {
+    bottom: 0;
+  }
+  &.middle {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .toast {
+    animation: fade-in 1s;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 15px;
+  }
+  .close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    padding-left: 8px;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0px;
+      height: 100%;
+      top: 0;
+      border-left: 1px solid #ccc;
+    }
   }
 }
 </style>
