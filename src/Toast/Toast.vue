@@ -46,7 +46,6 @@ export default {
   },
   data() {
     return {
-      closed:false
     }
   },
   mounted() {
@@ -62,9 +61,8 @@ export default {
   },
   methods: {
     close() {
-      console.log(1111111)
-      this.closed = true
       this.$el.remove();
+      this.$emit('close')
       this.$destroy();
     },
     onClickClose() {
