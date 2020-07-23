@@ -5,16 +5,22 @@ Vue.use(plugin);
 
 new Vue({
   el: "#app",
-  mounted() {
-    this.$toast("文文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字字文字文字", {
-      enableHtml:true,
-      position:"middle",
-      closeButton: {
-        text: "Close",
-        callback() {
-          console.log("我知道了");
-        },
-      },
-    });
+  mounted() {},
+  methods: {
+    showToast() {
+      this.$toast(
+        "文文字文"+Math.random(),
+        {
+          enableHtml: true,
+          position: "middle",
+          closeButton: {
+            text: "Close",
+            callback() {
+              console.log("我知道了");
+            },
+          },
+        }
+      );
+    },
   },
 });
