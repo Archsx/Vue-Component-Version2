@@ -57,3 +57,24 @@
     }
 
 ```
+
+##### 小小的例子
+
+```html
+<div>
+  <p>Only you can stop forest fires</p>
+</div>
+```
+
+The template compiler will convert the HTML above into:
+
+```javascript
+
+//...
+render(h){
+    return h('div',{},h('p',{},'Only you can stop forest fires'))
+}
+
+
+
+```
