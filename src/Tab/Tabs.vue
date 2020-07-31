@@ -5,27 +5,32 @@
 </template>
 
 <script>
+import Vue from "vue";
 export default {
-  name:'Tabs',
-  props:{
-    selected:{
-      type:String,
-      required:true
+  name: "Tabs",
+  provide() {
+    this.eventBus = new Vue();
+    return {
+      eventBus: this.eventBus,
+    };
+  },
+  props: {
+    selected: {
+      type: String,
+      required: true,
     },
-    direction:{
-      type:String,
-      default:'horizon',
-      validator(value){
-        return ['horizon','vertical'].includes(value)
-      }
-    }
+    direction: {
+      type: String,
+      default: "horizon",
+      validator(value) {
+        return ["horizon", "vertical"].includes(value);
+      },
+    },
   },
-  created() {
-    //this.$emit('update:selected','xxx')
+  mounted() {
+      this.eventBus.$emit("update:selected", this.selected || this.$children[0].name);
   },
-}
+};
 </script>
 
-<style >
-
-</style>
+<style></style>

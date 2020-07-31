@@ -21,4 +21,8 @@ new Vue({
       selectedTab:'sports'
     }
   },
+  methods: {
+    handleChange(val){
+    }
+  },
 })
