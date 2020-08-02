@@ -11,7 +11,7 @@ export default {
   provide() {
     this.eventBus = new Vue();
     return {
-      eventBus: this.eventBus,
+      eventBus: this.eventBus
     };
   },
   props: {
@@ -28,12 +28,16 @@ export default {
     },
   },
   mounted() {
+         console.log( this.$el.getBoundingClientRect())
     this.$children.forEach((vm) => {
       // 查找TabHead组件
       if (vm.$options.name === "TabsHead") {
         // 查找被选中的TabItem组件
         vm.$children.forEach((item) => {
-          if (item.$options.name === "TabsItem" && item.name === this.selected) {
+          if (
+            item.$options.name === "TabsItem" &&
+            item.name === this.selected
+          ) {
             this.eventBus.$emit("update:selected", this.selected, item);
           }
         });
@@ -43,4 +47,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.tabs {
+  padding: 42px 24px 50px;
+}
+</style>
