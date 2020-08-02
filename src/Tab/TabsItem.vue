@@ -37,7 +37,7 @@ export default {
   inject: ["eventBus"],
   methods: {
     xxx() {
-      this.eventBus.$emit("update:selected", this.name);
+      this.eventBus.$emit("update:selected", this.name,this);
     },
   },
 };
@@ -46,8 +46,10 @@ export default {
 <style lang="scss" scoped>
 .tabs-item {
   padding: 12px 16px;
+  cursor: pointer;
   &.active{
-    background:red
+    color: #1890ff;
+    font-weight: 500;
   }
 }
 </style>

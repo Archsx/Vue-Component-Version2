@@ -28,7 +28,17 @@ export default {
     },
   },
   mounted() {
-      this.eventBus.$emit("update:selected", this.selected || this.$children[0].name);
+    this.$children.forEach((vm) => {
+      // 查找TabHead组件
+      if (vm.$options.name === "TabsHead") {
+        // 查找被选中的TabItem组件
+        vm.$children.forEach((item) => {
+          if (item.$options.name === "TabsItem" && item.name === this.selected) {
+            this.eventBus.$emit("update:selected", this.selected, item);
+          }
+        });
+      }
+    });
   },
 };
 </script>
