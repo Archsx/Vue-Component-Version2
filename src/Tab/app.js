@@ -18,7 +18,7 @@ new Vue({
   },
   data() {
     return {
-      selectedTab:'sports'
+      selectedTab:'news'
     }
   },
   methods: {

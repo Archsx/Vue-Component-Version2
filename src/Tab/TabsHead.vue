@@ -2,7 +2,7 @@
   <div class="tabs-head">
     <slot></slot>
     <div class="line" ref="line"></div>
-    <div class="actions">
+    <div class="actions" v-if="$slots.actions">
       <slot name="actions"></slot>
     </div>
   </div>

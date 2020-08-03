@@ -11,7 +11,7 @@ export default {
   provide() {
     this.eventBus = new Vue();
     return {
-      eventBus: this.eventBus
+      eventBus: this.eventBus,
     };
   },
   props: {
@@ -28,7 +28,11 @@ export default {
     },
   },
   mounted() {
-         console.log( this.$el.getBoundingClientRect())
+    if (!this.$children.length) {
+      console &&
+        console.warn &&
+        console.warn("tabs的子组件应该是tabs-head和tabs-body,但你没有子组件");
+    }
     this.$children.forEach((vm) => {
       // 查找TabHead组件
       if (vm.$options.name === "TabsHead") {

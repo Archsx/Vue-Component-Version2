@@ -1,5 +1,10 @@
 <template>
-  <div class="tabs-item" @click="xxx" :class="classes">
+  <div
+    class="tabs-item"
+    @click="handleClick"
+    :class="classes"
+    :data-name="name"
+  >
     <slot></slot>
   </div>
 </template>
@@ -23,21 +28,28 @@ export default {
     };
   },
   computed: {
-    classes(){
+    classes() {
       return {
-        active:this.active
-      }
-    }
+        active: this.active,
+        disabled: this.disabled,
+      };
+    },
   },
   created() {
-    this.eventBus.$on("update:selected", (name) => {
-      this.active = name === this.name;
-    });
+    if (this.eventBus) {
+      this.eventBus.$on("update:selected", (name) => {
+        this.active = name === this.name;
+      });
+    }
   },
   inject: ["eventBus"],
   methods: {
-    xxx() {
-      this.eventBus.$emit("update:selected", this.name,this);
+    handleClick() {
+      if (this.disabled) {
+        return;
+      }
+      this.$emit('click',this) // 这一句是为了测试
+      this.eventBus && this.eventBus.$emit("update:selected", this.name, this);
     },
   },
 };
@@ -47,9 +59,13 @@ export default {
 .tabs-item {
   padding: 12px 16px;
   cursor: pointer;
-  &.active{
+  &.active {
     color: #1890ff;
     font-weight: 500;
+  }
+  &.disabled {
+    color: rgba(0, 0, 0, 0.25);
+    cursor: not-allowed;
   }
 }
 </style>
