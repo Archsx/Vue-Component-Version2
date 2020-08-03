@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+      }
+
+      #app{
+        padding:10px;
+        margin: 100px;;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- :selected="selectedTab" @update:selected="selectedTab=$event" -->
+      <tabs :selected.sync="selectedTab" @update:selected="handleChange">
+        <tabs-head>
+          <template slot="actions">
+              <button>设置</button>
+          </template>
+          <tabs-item name="news">新闻</tabs-item>
+          <tabs-item name="sports" disabled>体育</tabs-item>
+          <tabs-item name="finace">财经</tabs-item>
+        </tabs-head>
+        <tabs-body>
+          <tabs-pane name="news">新闻相关的资讯</tabs-pane>
+          <tabs-pane name="sports">体育相关的资讯</tabs-pane>
+          <tabs-pane name="finace">财经相关的资讯</tabs-pane>
+        </tabs-body>
+      </tabs>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
