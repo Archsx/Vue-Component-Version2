@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .collapse-icon{
+        position: absolute;
+        left:16px;
+        top:50%;
+        transform: translateY(-50%);
+        transition: all 0.3s;
+      }
+
+      .collapse-icon.spread{
+        transform: translateY(-50%) rotate(90deg);
+      }
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <collapse v-model="activekey">
+        <collapse-item key="1" header="标题1">这是最好的时代</collapse-item>
+        <collapse-item key="2" header="标题2">这是最坏的时代</collapse-item>
+        <collapse-item key="3" header="标题3">
+          <template v-slot:icon="slotProps">
+              <icon name="thumbs-up" :class="slotProps.active ? 'spread' : '' " class="collapse-icon"></icon>
+          </template>  
+          作用域插槽，使用自定义的icon
+        </collapse-item>
+      
+      </collapse>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
