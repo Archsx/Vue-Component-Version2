@@ -12,5 +12,10 @@ new Vue({
   components:{
     Collapse,
     CollapseItem
-  }
+  },
+  data() {
+    return {
+      selected:['2','1']
+    }
+  },
 })
