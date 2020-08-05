@@ -30,7 +30,7 @@
   </head>
   <body>
     <div id="app">
-      <collapse v-model="activekey">
+      <collapse v-model="activekey" :single-open = "true">
         <collapse-item key="1" header="标题1">这是最好的时代</collapse-item>
         <collapse-item key="2" header="标题2">这是最坏的时代</collapse-item>
         <collapse-item key="3" header="标题3">
