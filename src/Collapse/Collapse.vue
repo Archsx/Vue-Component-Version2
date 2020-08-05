@@ -6,14 +6,18 @@
 
 <script>
 export default {
-  model:{
-    prop:'activekey',
-    event:'change'
+  model: {
+    prop: "activekey",
+    event: "change",
   },
   props: {
     activekey: {
       type: Array,
       required: true,
+    },
+    "single-open": {
+      type: Boolean,
+      default: false,
     },
   },
   provide() {
@@ -21,18 +25,30 @@ export default {
       getActiveKey: () => {
         return this.activekey;
       },
-      toggleActiveState:(key)=>{
-        const idx = this.activekey.indexOf(key)
-        let keyArray
-        if(idx>=0){
-          keyArray=  this.activekey.filter((val)=>{
-            return val !== key
-          })
-        }else{
-          keyArray = [...this.activekey,key]
+      toggleActiveState: (key) => {
+        let keyArray;
+
+        if (this.singleOpen) {
+          keyArray = [key];
+          this.$children.forEach((vm) => {
+            if (key !== vm.$vnode.key) {
+              vm.isActive = false;
+            }
+          });
+        } else {
+          const idx = this.activekey.indexOf(key);
+
+          if (idx >= 0) {
+            keyArray = this.activekey.filter((val) => {
+              return val !== key;
+            });
+          } else {
+            keyArray = [...this.activekey, key];
+          }
         }
-        this.$emit('change',keyArray)
-      }
+
+        this.$emit("change", keyArray);
+      },
     };
   },
   mounted() {},
