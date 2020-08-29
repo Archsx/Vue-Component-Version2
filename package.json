@@ -6,7 +6,9 @@
   "scripts": {
     "start": "parcel %INIT_CWD%/index.html --no-cache",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-    "dev-test": " concurrently \" parcel watch test/* --no-cache \"  \"karma start --auto-watch\""
+    "dev-test": " concurrently \" parcel watch test/* --no-cache \"  \"karma start --auto-watch\"",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,7 @@
   "homepage": "https://github.com/Archsx/Vue-Component-Version2#readme",
   "dependencies": {
     "concurrently": "^5.2.0",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
@@ -34,11 +36,14 @@
     "karma-mocha": "^2.0.1",
     "karma-sinon-chai": "^2.0.2",
     "mocha": "^7.2.0",
+    "node-sass": "^4.14.1",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.26.7",
+    "sass-loader": "^10.0.1",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12",
+    "vuepress": "^1.5.4"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"

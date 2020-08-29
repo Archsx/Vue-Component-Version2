@@ -12,6 +12,7 @@
     </div>
   </button>
 </template>
+
 <script>
 import Icon from "./Icon.vue";
 export default {
@@ -90,10 +91,20 @@ export default {
 </script>
 
 <style lang="scss">
+$button-height: 32px;
+$font-size: 14px;
+$button-bg: white;
+$button-active-bg: #eee;
+$border-radius: 4px;
+$color: #333;
+$border-color: #999;
+$border-color-hover: #666;
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -113,39 +124,45 @@ button:disabled {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: var(--font-size);
-  height: var(--button-height);
+  font-size: $font-size;
+  height: $button-height;
   padding: 0 1em;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  background: var(--button-bg);
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  background: $button-bg;
+
   &:hover {
-    border-color: var(--border-color-hover);
+    border-color: $border-color-hover;
   }
 
   &:active {
-    background-color: var(--button-active-bg);
+    background-color: $button-active-bg;
   }
 
   &:focus {
     outline: none;
   }
+
   > .content {
     order: 2;
   }
+
   > .icon {
     order: 1;
     margin: 0 0.3em 0 0;
   }
+
   &.icon-right {
     > .content {
       order: 1;
     }
+
     > .icon {
       order: 2;
       margin: 0 0 0 0.3em;
     }
   }
+
   .loading {
     animation: spin 1.5s linear infinite;
   }
