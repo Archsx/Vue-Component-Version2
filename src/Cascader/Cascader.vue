@@ -11,9 +11,10 @@
     </div>
     <div class="popover">
       <cascader-item
-        v-for="(option, index) in options"
+        v-for="(item, index) in activeNodesArray"
         :key="index"
-        :option="option"
+        :option="item"
+        @add="addNodes"
       >
       </cascader-item>
     </div>
@@ -21,6 +22,15 @@
 </template>
 
 <script>
+function addLevel(arr, lv = 0) {
+  arr.forEach((ele) => {
+    ele.level = lv;
+    if (ele.children) {
+      addLevel(ele.children, lv + 1);
+    }
+  });
+}
+
 import CascaderItem from "./CascaderItem";
 import Icon from "../Button/Icon";
 export default {
@@ -34,6 +44,36 @@ export default {
       type: Array,
     },
   },
+  data() {
+    return {
+      activeNodesArray: [this.options],
+    };
+  },
+  methods: {
+    addNodes(item) {
+      let lv = item.level;
+
+      if (item.children) {
+        const nextNodeArray = this.activeNodesArray[lv + 1];
+
+        if (nextNodeArray) {
+          if (nextNodeArray === item.children) {
+            return;
+          } else {
+            this.activeNodesArray.splice(lv + 1);
+            this.activeNodesArray.push(item.children);
+          }
+        } else {
+          this.activeNodesArray.push(item.children);
+        }
+      }
+      console.log(this.activeNodesArray)
+    },
+  },
+  created() {
+    addLevel(this.options);
+  },
+  mounted() {},
 };
 </script>
 
