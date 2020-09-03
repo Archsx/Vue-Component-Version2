@@ -1,42 +1,53 @@
 <template>
-  <ul>
-    <li v-for="(item,index) in option" :key="index" @click="handleClick(item)">{{ item.label }}</li>
-  </ul>
+  <div class="cascaderItem" :key="Math.random()">
+    <div class="left">
+      <div
+        class="label"
+        v-for="(item, index) in items"
+        :key="index"
+        @click="leftSelected = item"
+      >
+        {{ item.value }}
+      </div>
+    </div>
+    <div class="right" v-if="rightItems">
+      <cascader-item  :items="rightItems" ></cascader-item>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "CascaderItem",
-  props: ["option"],
-  mounted(){
+  props: {
+    items: {
+      type: Array,
+    },
   },
-  methods: {
-    handleClick(item){
-        this.$emit('add',item)
-    }
+  data() {
+    return {
+      leftSelected: null,
+    };
+  },
+  computed: {
+    rightItems() {
+      if (this.leftSelected && this.leftSelected.children) {
+        return this.leftSelected.children;
+      }
+    },
   },
 };
 </script>
 
-<style scoped lang="scss">
-ul {
-  border-radius: 4px 0 0 4px;
-  display:inline-block;
-  min-width: 111px;
-  height: 180px;
-  padding:4px 0;
-  overflow: auto;
-  border-right: 1px solid #e8e8e8;
-  li {
-    list-style: none;
-    padding-left: 0;
-    // font-weight: 600;
-    // background-color: #fafafa;
-    position: relative;
-    padding: 5px 24px 5px 12px;
-    line-height: 22px;
-    white-space: nowrap;
-    cursor: pointer;
+<style scoped  lang="scss">
+.cascaderItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  .left {
+    border: 1px solid red;
+  }
+  .right {
   }
 }
 </style>
