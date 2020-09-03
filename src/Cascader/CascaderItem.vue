@@ -1,5 +1,5 @@
 <template>
-  <div class="cascaderItem" :key="Math.random()">
+  <div class="cascaderItem" :key="Math.random()" :style="{height:height}">
     <div class="left">
       <div
         class="label"
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <cascader-item  :items="rightItems" ></cascader-item>
+      <cascader-item  :items="rightItems" :height="height"></cascader-item>
     </div>
   </div>
 </template>
@@ -23,6 +23,9 @@ export default {
     items: {
       type: Array,
     },
+    height:{
+      type:String
+    }
   },
   data() {
     return {
@@ -44,10 +47,13 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  height: 100px;
   .left {
     border: 1px solid red;
+    height: 100%;
   }
   .right {
+    height:100%
   }
 }
 </style>
