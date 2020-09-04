@@ -1,3 +1,4 @@
+// 这个方法暂时无用
 class Node {
   constructor(element) {
     this.element = element;

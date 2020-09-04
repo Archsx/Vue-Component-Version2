@@ -8,6 +8,7 @@ new Vue({
   },
   data() {
     return {
+      selected:[],
       options: [
         {
           value: "zhejiang",
