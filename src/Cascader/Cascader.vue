@@ -5,7 +5,7 @@
       <cascader-items
         :items="options"
         class="popover"
-        :height="popoverHeight "
+        :height="popoverHeight"
       ></cascader-items>
     </div>
   </div>
@@ -38,7 +38,7 @@ export default {
 .cascader {
   position: relative;
   .trigger {
-    border: 1px solid red;
+    border: 1px solid black;
     height: 32px;
     width: 100px;
   }
@@ -46,8 +46,8 @@ export default {
     position: absolute;
     top: 100%;
     left: 0;
-    border: 1px solid green;
     background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     display: flex;
     .label {
       white-space: nowrap;
