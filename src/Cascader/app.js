@@ -11,7 +11,6 @@ new Vue({
   methods: {
     loadData(item) {
       return new Promise((resolve, reject) => {
-        console.log('async process')
         setTimeout(() => {
           resolve(item);
         }, 5000);
