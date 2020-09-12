@@ -17,6 +17,9 @@
 
 <script>
 import CascaderItems from "./CascaderItem";
+
+let p = Promise.resolve();
+
 export default {
   name: "Cascader",
   components: {
@@ -40,15 +43,37 @@ export default {
         return [];
       },
     },
+    loadData: {
+      type: Function,
+    },
   },
   data() {
     return {
       popoverVisible: true,
+      timer: null,
     };
   },
   methods: {
-    onUpdateSelected(item) {
-      this.$emit("update:selected", item);
+    onUpdateSelected(item, level) {
+      if (this.selected[level] && this.selected[level].label === item.label) {
+        return;
+      }
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(() => {
+        let copy = JSON.parse(JSON.stringify(this.selected));
+        p = p.then(() => {
+          this.$set(item, "isLoading", true);
+          return this.loadData(item).then((item) => {
+            this.$set(item, "isLoading", false);
+            copy[level] = item;
+            copy.splice(level + 1);
+            this.$emit("update:selected", copy);
+          });
+        });
+      }, 500);
+      // this.$emit("update:selected", item);
     },
   },
 };
