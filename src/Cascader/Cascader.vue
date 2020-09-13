@@ -1,5 +1,5 @@
 <template>
-  <div class="cascader">
+  <div class="cascader" v-click-outside="close">
     <div class="trigger" @click="toggle">
       {{ result }}
     </div>
@@ -18,6 +18,7 @@
 <script>
 import CascaderItems from "./CascaderItem";
 import _ from "lodash";
+import ClickOutside from './directive'
 
 let p = Promise.resolve();
 
@@ -25,6 +26,9 @@ export default {
   name: "Cascader",
   components: {
     CascaderItems,
+  },
+  directives:{
+    ClickOutside
   },
   computed: {
     result() {
@@ -84,13 +88,13 @@ export default {
     },
     open() {
       this.popoverVisible = true;
-      setTimeout(() => {
-        document.addEventListener("click", this.onClickDocument);
-      });
+      // setTimeout(() => {
+      //   document.addEventListener("click", this.onClickDocument);
+      // });
     },
     close() {
       this.popoverVisible = false;
-      document.removeEventListener("click", this.onClickDocument);
+      // document.removeEventListener("click", this.onClickDocument);
     },
     toggle() {
       if (this.popoverVisible) {
@@ -99,13 +103,13 @@ export default {
         this.open();
       }
     },
-    onClickDocument(e) {
-      if (this.$el.contains(e.target)) {
-        return;
-      } else {
-        this.close();
-      }
-    },
+    // onClickDocument(e) {
+    //   if (this.$el.contains(e.target)) {
+    //     return;
+    //   } else {
+    //     this.close();
+    //   }
+    // },
   },
 };
 </script>
