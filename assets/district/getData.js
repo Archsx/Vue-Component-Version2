@@ -24,4 +24,20 @@ let result = res.reduce((arr, ele) => {
   return arr;
 }, []);
 
+
+function judgeLeaf(arr){
+  arr.forEach(ele=>{
+    if(ele.children){
+      ele.isLeaf = false
+      judgeLeaf(ele.children)
+    }else{
+      ele.isLeaf = true
+    }
+  })
+}
+
+judgeLeaf(result)
+
+
+
 fs.writeFileSync(filePath, JSON.stringify(result));

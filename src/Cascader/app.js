@@ -3,6 +3,30 @@ import Vue from "vue";
 
 import options from "../../assets/district/data.js";
 
+import _ from "lodash";
+
+let initData = _.cloneDeep(options);
+initData.forEach((ele) => [delete ele.children]);
+
+function findNode(id, arr) {
+  let node;
+  let length = arr.length;
+  for (let i = 0; i < length; i++) {
+    let target = arr[i];
+    if (target.id === id) {
+      return target;
+    } else {
+      if (target.children) {
+        node = findNode(id, target.children);
+        if (node) {
+          return node;
+        }
+      }
+    }
+  }
+  return node;
+}
+
 new Vue({
   el: "#app",
   components: {
@@ -11,16 +35,17 @@ new Vue({
   methods: {
     loadData(item) {
       return new Promise((resolve, reject) => {
+        const result = _.cloneDeep(findNode(item.id, options));
         setTimeout(() => {
-          resolve(item);
-        }, 5000);
+          resolve(result);
+        }, Math.random() * 1000);
       });
     },
   },
   data() {
     return {
       selected: [],
-      options,
+      options: initData,
       // options: [
       //   {
       //     value: "zhejiang",

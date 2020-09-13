@@ -6,11 +6,14 @@
         v-for="(item, index) in items"
         :key="index"
         @click="onClickLabel(item)"
-        :style="{cursor:'pointer'}"
       >
         {{ item.label }}
         <icon v-if="item.isLoading" name="loading" class="icon loading"></icon>
-        <icon v-if="!item.isLoading && item.children" name="arrow-right" class="icon"></icon>
+        <icon
+          v-if="!item.isLoading && (!item.isLeaf || item.children) "
+          name="arrow-right"
+          class="icon"
+        ></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -89,7 +92,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -99,7 +101,6 @@ export default {
     transform: rotate(360deg);
   }
 }
-
 
 ::-webkit-scrollbar-thumb:horizontal {
   /*水平滚动条的样式*/
@@ -148,6 +149,11 @@ export default {
   .label {
     padding: 0.6em 1.5em;
     position: relative;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      background: #eee;
+    }
 
     .icon {
       position: absolute;
@@ -156,7 +162,7 @@ export default {
       top: 50%;
       right: 6px;
       margin-top: -6px;
-      &.loading{
+      &.loading {
         animation: spin 1.5s linear infinite;
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">
+    <div class="trigger" @click="toggle">
       {{ result }}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
@@ -17,6 +17,7 @@
 
 <script>
 import CascaderItems from "./CascaderItem";
+import _ from "lodash";
 
 let p = Promise.resolve();
 
@@ -49,7 +50,7 @@ export default {
   },
   data() {
     return {
-      popoverVisible: true,
+      popoverVisible: false,
       timer: null,
     };
   },
@@ -62,18 +63,48 @@ export default {
         clearTimeout(this.timer);
       }
       this.timer = setTimeout(() => {
-        let copy = JSON.parse(JSON.stringify(this.selected));
+        let copy = _.cloneDeep(this.selected);
         p = p.then(() => {
-          this.$set(item, "isLoading", true);
-          return this.loadData(item).then((item) => {
-            this.$set(item, "isLoading", false);
+          if (item.isLeaf) {
             copy[level] = item;
             copy.splice(level + 1);
             this.$emit("update:selected", copy);
-          });
+          } else {
+            this.$set(item, "isLoading", true);
+            return this.loadData(item).then((res) => {
+              this.$set(item, "isLoading", false);
+              copy[level] = res;
+              copy.splice(level + 1);
+              this.$emit("update:selected", copy);
+            });
+          }
         });
-      }, 500);
+      }, 300);
       // this.$emit("update:selected", item);
+    },
+    open() {
+      this.popoverVisible = true;
+      setTimeout(() => {
+        document.addEventListener("click", this.onClickDocument);
+      });
+    },
+    close() {
+      this.popoverVisible = false;
+      document.removeEventListener("click", this.onClickDocument);
+    },
+    toggle() {
+      if (this.popoverVisible) {
+        this.close();
+      } else {
+        this.open();
+      }
+    },
+    onClickDocument(e) {
+      if (this.$el.contains(e.target)) {
+        return;
+      } else {
+        this.close();
+      }
     },
   },
 };
@@ -99,6 +130,7 @@ body {
 .cascader {
   position: relative;
   height: 32px;
+  display: inline-block;
   .trigger {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC;
     height: 100%;
