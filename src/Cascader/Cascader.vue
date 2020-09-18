@@ -155,6 +155,7 @@ body {
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     display: flex;
+    z-index: 1;
     .label {
       white-space: nowrap;
     }
